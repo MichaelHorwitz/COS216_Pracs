@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+<body>
+    <nav>
+        <nav>
+            <ul>
+                <li><a href="/PA1/Index.html">Cars</a></li>
+                <li><a href="/Pa1/Brands.html">Car Brands</a></li>
+                <li><a href="/Pa1/FindCar.html">Find me a car</a></li>
+                <li><a href="/Pa1/Compare.html">Compare</a></li>
+            </ul>
+        </nav>
+    </nav>
+    <header>
+        <h1>Find the best car for your needs</h1>
+        <h2>All fields marked * are required</h2>
+    </header>
+    <form>
+        *Year: <input  type="number" min="1940" max="2023" step="1" value="2023"><br>
+        *Fuel Type: <select>
+            <option value="petrol">Petrol</option>
+            <option value="diesel">Diesel</option>
+            <option value="electric">Electric</option>
+        </select><br>
+        *Transmission Type:
+        <input type="radio" id="automatic" name="transmission_type">Automatic
+        <input type="radio" id="Manual" name="transmission_type">Manual
+        <br>
+        *Number of Seats
+        <input  type="number" min="2" max="7" step="1" value="4"><br>
+        Colour
+        <select>
+            <option value=""></option>
+            <option value="Black">Black</option>
+            <option value="White">White</option>
+            <option value="Gray">Gray</option>
+            <option value="Red">Red</option>
+            <option value="Yellow">Yellow</option>
+            <option value="Blue">Blue</option>
+            <option value="Other">Other</option>
+        </select><br>
+        Warranty
+        <input type="radio" id="in" name="warranty">In Warranty
+        <input type="radio" id="out" name="warranty">Out of Warranty
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+    <ul>
+        <li>Car1</li>
+        <li>Car2</li>
+        <li>Car3</li>
+        <li>Car4</li>
+        <li>Car5</li>
+        <li>Car6</li>
+    </ul>
+</body>
