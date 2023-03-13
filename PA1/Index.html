@@ -3,121 +3,6 @@
 <head>
     <title>CarTographer</title>
     <link rel="stylesheet" type="text/css" href="./css/index.css">
-    <style>
-        @font-face {
-            font-family: Navbar;
-            src: url("fonts/RubikMonoOne-Regular.ttf");
-        }
-        @font-face {
-            font-family: Headings;
-            src: url("fonts/SecularOne-Regular.ttf");
-        }
-        @font-face {
-            font-family: Body;
-            src: url("fonts/GolosText-VariableFont_wght.ttf");
-        }
-        /*
-        Gray: #9c9c9c
-        Burgundy: #b03702
-        */
-        body{
-            background-color: #d6e5fc;
-            padding: 0px;
-            margin: 0px;
-        }
-        nav
-        {
-            background-color: #F98124;
-            text-align: center;
-            padding: 0px;
-            margin: 0px;
-            
-        }
-        .navbar{
-            list-style: none;
-            margin: 0%;
-            padding: 0%;
-            padding: 0px;
-            margin: 0px;
-        }
-        .navbar li{
-            display: inline;
-            padding: 0px;
-            margin: 0px;
-        }
-        .navbar li a{
-            padding: 0px;
-            margin: 0px;
-            display: inline-block;
-            padding: 2.2% 8%;
-            font-size: 105%;
-            text-decoration: none;
-            color: #11224d;
-            font-family: NavbarF;
-        }
-        .navbar li img{
-            position: absolute;
-            top: 00.5%;
-            left: 0.5%;
-            padding: 0px;
-            margin: 0px;
-            text-align: left;
-            width: 5%;
-
-        }
-        h1{
-            text-align: center;
-            background-color: #11224d;
-            color: rgb(255, 255, 255);
-            font-size: 500%;
-            padding: 0px;
-            margin: 0px;
-            font-family: Headings;
-        }
-        .searchOptions
-        {
-            display: inline-flex;
-            float: center;
-            width: 100%;
-            background-color: #2c599d;
-            justify-content: center;
-            align-items: center;
-
-
-        }
-        .searchOptions div{
-            padding: 0% 5%;
-            width: 30%;
-            background-color: #2c599d;
-            border: black;
-            border-width: 5px;
-            color: rgb(240, 240, 240);
-            font-family: Body;
-            text-align: center;
-        }
-        .filter{
-            padding: 0%;
-        }
-        .filList{
-            list-style-type: none;
-            padding-left: 0%;
-        }
-        h2{
-            margin: 0
-        }
-        .car_list{
-            display: flex;
-            
-        }
-        .car_list li h3{
-            font-family: Headings;
-        }
-        .car_list li{
-            background-color: aqua;
-            
-        }
-        
-    </style>
 </head>
 
 <body>
@@ -125,15 +10,15 @@
     <nav>
         <nav>
             <ul class="navbar">
-                <li><img src="./img/logo.png" ></li>
-                <li><a href="/PA1/Index.html">Cars</a></li>
+                <li><img src="./img/logo.png" alt="Image not found"></li>
+                <li><a href="/PA1/Index.html" class="curr_page" >Cars</a></li>
                 <li><a href="/Pa1/Brands.html">Car Brands</a></li>
                 <li><a href="/Pa1/FindCar.html">Find me a car</a></li>
                 <li><a href="/Pa1/Compare.html">Compare</a></li>
             </ul>
         </nav>
     </nav>
-    <header>
+    <header class="main_head">
         <h1>Car Catalog</h1>
     </header>
     <div class="searchOptions">
@@ -174,9 +59,11 @@
     <article>
         <ul class="car_list">
             <li>
-                <h3>Toyota Corolla</h3>
-                <img src="img/Car1.png" alt="Image could not be found" height="128">
-                <ul>
+                <span class="name_pic">
+                    <h3>Toyota Corolla</h3>
+                    <img src="img/Car1.png" alt="Image could not be found" height="128">
+                </span>
+                <ul class="car1_info">
                     <li>Brand: Toyota</li>
                     <li>Model: Corolla</li>
                     <li>Year: 2022</li>
@@ -186,51 +73,59 @@
                 </ul>
             </li>
             <li>
-                <h3>Toyota Rav4</h3>
-                <img src="img/Car2.png" alt="Image could not be found" height="128" width="128">
-                <ul>
+                <span class="name_pic">
+                    <h3>Toyota Rav4</h3>
+                    <img src="img/Car2.png" alt="Image could not be found" height="128">
+                </span>
+                <ul class="car1_info">
                     <li>Brand: Toyota</li>
-                    <li>Model: Rav 4</li>
+                    <li>Model: Rav4</li>
                     <li>Year: 2020</li>
                     <li>Doors: 5</li>
-                    <li>Seats: 7</li>
-                    <li>Horsepower: 203</li>
+                    <li>Seats: 5</li>
+                    <li>Horsepower: 203 HP</li>
                 </ul>
             </li>
             <li>
-                <h3>Tesla Roadster</h3>
-                <img src="../img/Car3.png" alt="Image could not be found" height="128" width="128">
-                <ul>
+                <span class="name_pic">
+                    <h3>Tesla Model Y</h3>
+                    <img src="img/Car3.png" alt="Image could not be found" height="128">
+                </span>
+                <ul class="car1_info">
                     <li>Brand: Tesla</li>
-                    <li>Model: Roadster</li>
-                    <li>Year: 2011</li>
-                    <li>Doors: 2</li>
-                    <li>Seats: 2</li>
-                    <li>Horsepower: 288</li>
-                </ul>
-            </li>
-            <li>
-                <h3>Toyota Camry</h3>
-                <img src="../img/Car4.png" alt="Image could not be found" height="128" width="128">
-                <ul>
-                    <li>Brand: Toyota</li>
-                    <li>Model: Camry</li>
-                    <li>Year: 2015</li>
+                    <li>Model: Model Y</li>
+                    <li>Year: 2020</li>
                     <li>Doors: 5</li>
                     <li>Seats: 5</li>
-                    <li>Horsepower: 178</li> <!--Maybe change to fuel mileage-->
+                    <li>Horsepower: 384 HP</li>
                 </ul>
             </li>
             <li>
-                <h3>Hyundai Tuscon</h3>
-                <img src="../img/Car5.png" alt="Image could not be found" height="128" width="128">
-                <ul>
+                <span class="name_pic">
+                    <h3>Mercedes E Class</h3>
+                    <img src="img/Car6.png" alt="Image could not be found" height="128">
+                </span>
+                <ul class="car1_info">
+                    <li>Brand: Mercedes</li>
+                    <li>Model: E Class</li>
+                    <li>Year: 2018</li>
+                    <li>Doors: 5</li>
+                    <li>Seats: 5</li>
+                    <li>Horsepower: 329 HP</li>
+                </ul>
+            </li>
+            <li>
+                <span class="name_pic">
+                    <h3>Hyundai Tuscon</h3>
+                    <img src="img/Car5.png" alt="Image could not be found" height="128">
+                </span>
+                <ul class="car1_info">
                     <li>Brand: Hyundai</li>
                     <li>Model: Tuscon</li>
-                    <li>Year: 2017</li>
+                    <li>Year: 2023</li>
                     <li>Doors: 5</li>
                     <li>Seats: 5</li>
-                    <li>Horsepower: 141</li>
+                    <li>Horsepower: 180 HP</li>
                 </ul>
             </li>
         </ul>

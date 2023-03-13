@@ -1,58 +1,104 @@
 <!DOCTYPE html>
-<head>
 
+<head>
+    <link rel="stylesheet" type="text/css" href="./css/FindCar.css">
+    <style>
+
+    </style>
 </head>
+
 <body>
     <nav>
         <nav>
-            <ul>
+            <ul class="navbar">
+                <li><img src="./img/logo.png" alt="Image not found"></li>
                 <li><a href="/PA1/Index.html">Cars</a></li>
                 <li><a href="/Pa1/Brands.html">Car Brands</a></li>
-                <li><a href="/Pa1/FindCar.html">Find me a car</a></li>
+                <li><a href="/Pa1/FindCar.html" class="curr_page">Find me a car</a></li>
                 <li><a href="/Pa1/Compare.html">Compare</a></li>
             </ul>
         </nav>
     </nav>
     <header>
-        <h1>Find the best car for your needs</h1>
-        <h2>All fields marked * are required</h2>
+        <h1>Find your best car</h1>
     </header>
-    <form>
-        *Year: <input  type="number" min="1940" max="2023" step="1" value="2023"><br>
-        *Fuel Type: <select>
-            <option value="petrol">Petrol</option>
-            <option value="diesel">Diesel</option>
-            <option value="electric">Electric</option>
-        </select><br>
-        *Transmission Type:
-        <input type="radio" id="automatic" name="transmission_type">Automatic
-        <input type="radio" id="Manual" name="transmission_type">Manual
-        <br>
-        *Number of Seats
-        <input  type="number" min="2" max="7" step="1" value="4"><br>
-        Colour
-        <select>
-            <option value=""></option>
-            <option value="Black">Black</option>
-            <option value="White">White</option>
-            <option value="Gray">Gray</option>
-            <option value="Red">Red</option>
-            <option value="Yellow">Yellow</option>
-            <option value="Blue">Blue</option>
-            <option value="Other">Other</option>
-        </select><br>
-        Warranty
-        <input type="radio" id="in" name="warranty">In Warranty
-        <input type="radio" id="out" name="warranty">Out of Warranty
-        <br>
-        <input type="submit" value="Submit">
-    </form>
-    <ul>
-        <li>Car1</li>
-        <li>Car2</li>
-        <li>Car3</li>
-        <li>Car4</li>
-        <li>Car5</li>
-        <li>Car6</li>
-    </ul>
+    <article>
+        <form class="main_form">
+            <h2>All fields marked * are required</h2><br>
+            *Year:<br><input type="number" min="1940" max="2023" step="1" value="2023"><br>
+            *Fuel Type:
+            <select>
+                <option value="petrol">Petrol</option>
+                <option value="diesel">Diesel</option>
+                <option value="electric">Electric</option>
+            </select><br>
+            <div>
+                *Transmission Type:
+                <input type="radio" id="automatic" name="transmission_type" value="auto">Automatic
+                <input type="radio" id="Manual" name="transmission_type">Manual
+            </div>
+            <br>
+            *Number of Seats
+            <input type="number" min="2" max="7" step="1" value="4"><br>
+            Colour
+            <select>
+                <option value=""></option>
+                <option value="Black">Black</option>
+                <option value="White">White</option>
+                <option value="Gray">Gray</option>
+                <option value="Red">Red</option>
+                <option value="Yellow">Yellow</option>
+                <option value="Blue">Blue</option>
+                <option value="Other">Other</option>
+            </select><br>
+            <div>
+                Warranty
+                <input type="radio" id="in" name="warranty">In Warranty
+                <input type="radio" id="out" name="warranty">Out of Warranty
+                <br>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+    </article>
+    <div class="results">
+        <ul class="result_list">
+            <a href="./Construction.html">
+                <li>
+                    Corolla<br>
+                    <img src="./img/Car1.png" alt="Car image not found" height="256"><br>
+                </li>
+            </a>
+            <a href="./Construction.html">
+                <li>Rav4<br>
+                    <img src="./img/Car2.png" alt="Car image not found" height="256"><br>
+
+                </li>
+            </a>
+            <a href="./Construction.html">
+                <li>Model Y<br>
+                    <img src="./img/Car3.png" alt="Car image not found" height="256"><br>
+
+                </li>
+            </a>
+            <a href="./Construction.html">
+                <li>Camry<br>
+                    <img src="./img/Car4.png" alt="Car image not found" height="256"><br>
+
+                </li>
+            </a>
+            <a href="./Construction.html">
+                <li>Tuscon<br>
+                    <img src="./img/Car5.png" alt="Car image not found" height="256"><br>
+
+                </li>
+            </a>
+            <a href="./Construction.html">
+                <li>E class<br>
+                    <img src="./img/Car6.png" alt="Car image not found" height="256"><br>
+
+                </li>
+            </a>
+        </ul>
+    </div>
+
 </body>
