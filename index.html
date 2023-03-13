@@ -2,21 +2,24 @@
 <!doctype html>
 <title>Cartographer</title>
 <style>
-  @font-face {
+@font-face {
     font-family: NavbarF;
-    src: url("/PA1/fonts/RubikMonoOne-Regular.ttf");
+    src: url("../COS216/PA1/fonts/RubikMonoOne-Regular.ttf");
 }
+
 @font-face {
     font-family: Headings;
-    src: url("/PA1/fonts/SecularOne-Regular.ttf");
+    src: url("./COS216/PA1/fonts/SecularOne-Regular.ttf");
 }
+
 @font-face {
     font-family: Body;
-    src: url("/PA1/fonts/GolosText-VariableFont_wght.ttf");
+    src: url("./COS216/PA1/fonts/GolosText-VariableFont_wght.ttf");
 }
   body {
     display: grid;
     text-align: center;
+    justify-content: center;
     padding: 15%;
     background-color: #F98124;
   }
@@ -28,8 +31,9 @@
 
 
   article {
-    display: block;
-    text-align: left;
+    display: flex;
+    text-align: center;
+    justify-content: center;
     width: 650px;
     margin: 0 auto;
   }
@@ -38,7 +42,10 @@
     color:#2c599d;
     text-decoration: none;
   }
-
+img{
+  padding-left: 250px;
+  padding-bottom: 40px;
+}
   a:hover {
     color: #333;
     text-decoration: none;
@@ -53,21 +60,22 @@
   <header>
     <h1>CarTographer</h1>
   </header>
-  <nav>
+  <img src="./COS216/PA1/img/logo.png" alt="Logo not found" height="128">
+  <nav> 
     <button type="button">
-      <a href="/PA1/Index.html">View Prac 1</a>
+      <a href="./COS216/PA1/Index.html">View Prac 1</a>
     </button>
     <button type="button">
-      <a href="/PA2/home.html">View Prac 2</a>
+      <a href="./COS216/PA1/Construction.html">View Prac 2</a>
     </button>
     <button type="button">
-      <a href="/PA3/home.html">View Prac 3</a>
+      <a href="./COS216/PA1/Construction.html">View Prac 3</a>
     </button>
     <button type="button">
-      <a href="/PA4/home.html">View Prac 4</a>
+      <a href="./COS216/PA1/Construction.html">View Prac 4</a>
     </button>
     <button type="button">
-      <a href="/PA5/home.html">View Prac 5</a>
+      <a href="./COS216/PA1/Construction.html">View Prac 5</a>
     </button>
   </nav>
 

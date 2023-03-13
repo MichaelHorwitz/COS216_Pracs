@@ -1,16 +1,16 @@
 @font-face {
     font-family: NavbarF;
-    src: url("/PA1/fonts/RubikMonoOne-Regular.ttf");
+    src: url("../fonts/RubikMonoOne-Regular.ttf");
 }
 
 @font-face {
     font-family: Headings;
-    src: url("/PA1/fonts/SecularOne-Regular.ttf");
+    src: url("../fonts/SecularOne-Regular.ttf");
 }
 
 @font-face {
     font-family: Body;
-    src: url("/PA1/fonts/GolosText-VariableFont_wght.ttf");
+    src: url("../fonts/GolosText-VariableFont_wght.ttf");
 }
 
 /*
