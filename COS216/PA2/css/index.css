@@ -1,3 +1,4 @@
+/*Michael Horwitz u22512323*/
 @font-face {
     font-family: NavbarF;
     src: url("../fonts/RubikMonoOne-Regular.ttf");
@@ -118,7 +119,6 @@ h2{
     gap: 0px 50px;
     padding-top: 0.5%;
     margin-top: 10px;
-    height: 800px;
     background-color: #facdaa;
 }
 .car_list li{
@@ -127,7 +127,7 @@ h2{
     border-style: solid;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    height: 220px;
+    height: 200px;
     gap: 0px;
     justify-content: center;
     padding: 0px;
@@ -156,4 +156,7 @@ h2{
     padding: 0px;
     margin: 0px;
     text-align: center;
+}
+#searchButtonList{
+    list-style-type: none;
 }

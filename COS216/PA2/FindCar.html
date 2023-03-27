@@ -1,10 +1,9 @@
+<!--Michael Horwitz u22512323-->
 <!DOCTYPE html>
-
-<head>
+<head lang="en">
     <link rel="stylesheet" type="text/css" href="./css/FindCar.css">
-    <style>
-
-    </style>
+    <meta charset="utf-8">
+    <title>Find A Car</title>
 </head>
 
 <body>
@@ -23,82 +22,53 @@
         <h1>Find your best car</h1>
     </header>
     <article>
-        <form class="main_form">
+        <div class="main_form" id="main_form" >
+            
             <h2>All fields marked * are required</h2><br>
-            *Year:<br><input type="number" min="1940" max="2023" step="1" value="2023"><br>
-            *Fuel Type:
-            <select>
-                <option value="petrol">Petrol</option>
-                <option value="diesel">Diesel</option>
-                <option value="electric">Electric</option>
+            *Make:<br><input type="text" value="AC" id="makeOf"><br>
+            *Engine Type:
+            <select id="engSelect">
+                <option value="Gasoline">Gasoline</option>
+                <option value="Diesel">Diesel</option>
+                <option value="Electric">Electric</option>
+                <option value="Hybrid">Hybrid</option>
             </select><br>
             <div>
-                *Transmission Type:
-                <input type="radio" id="automatic" name="transmission_type" value="auto">Automatic
-                <input type="radio" id="Manual" name="transmission_type">Manual
+                *Transmission:
+                <input type="radio" id="auto" name="transmission_type" checked="checked">Automatic
+                <input type="radio" id="man" name="transmission_type">Manual
             </div>
             <br>
             *Number of Seats
-            <input type="number" min="2" max="7" step="1" value="4"><br>
-            Colour
-            <select>
-                <option value=""></option>
-                <option value="Black">Black</option>
-                <option value="White">White</option>
-                <option value="Gray">Gray</option>
-                <option value="Red">Red</option>
-                <option value="Yellow">Yellow</option>
-                <option value="Blue">Blue</option>
-                <option value="Other">Other</option>
+            <input type="number" min="2" max="7" step="1" value="2" id="numSeats"><br>
+            Number of cylinders
+            <input type="number" min="1" max="16" step="1" id="numCyl"><br>
+            Body Type<br>
+            <select id="bodyType">
+                <option value=NoVal>Any</option>
+                <option value=Cabriolet>Cabriolet</option>
+                <option value=Coupe>Coupe</option>
+                <option value=Roadster>Roadster</option>
+                <option value=Crossover>Crossover</option>
+                <option value=Sedan>Sedan</option>
+                <option value=Hatchback>Hatchback</option>
+                <option value=Liftback>Liftback</option>
+                <option value=Wagon>Wagon</option>
+                <option value=Minivan>Minivan</option>
+                <option value=Fastback>Fastback</option>
+                <option value=Pickup>Pickup</option>
+                <option value=hardtop>hardtop</option>
+                <option value=Targa>Targa</option>
+                <option value=Limousine>Limousine</option>
+                
             </select><br>
-            <div>
-                Warranty
-                <input type="radio" id="in" name="warranty">In Warranty
-                <input type="radio" id="out" name="warranty">Out of Warranty
-                <br>
-            </div>
-            <input type="submit" value="Submit">
-        </form>
+            <input type="submit" id="submit">
+        </div>
     </article>
     <div class="results">
-        <ul class="result_list">
-            <a href="./Construction.html">
-                <li>
-                    Corolla<br>
-                    <img src="./img/Car1.png" alt="Car image not found" height="256"><br>
-                </li>
-            </a>
-            <a href="./Construction.html">
-                <li>Rav4<br>
-                    <img src="./img/Car2.png" alt="Car image not found" height="256"><br>
-
-                </li>
-            </a>
-            <a href="./Construction.html">
-                <li>Model Y<br>
-                    <img src="./img/Car3.png" alt="Car image not found" height="256"><br>
-
-                </li>
-            </a>
-            <a href="./Construction.html">
-                <li>Camry<br>
-                    <img src="./img/Car4.png" alt="Car image not found" height="256"><br>
-
-                </li>
-            </a>
-            <a href="./Construction.html">
-                <li>Tuscon<br>
-                    <img src="./img/Car5.png" alt="Car image not found" height="256"><br>
-
-                </li>
-            </a>
-            <a href="./Construction.html">
-                <li>E class<br>
-                    <img src="./img/Car6.png" alt="Car image not found" height="256"><br>
-
-                </li>
-            </a>
+        <ul class="result_list" id="result_list">
+            
         </ul>
     </div>
-
+    <script type="text/javascript" src="./js/findCar.js"></script>
 </body>
