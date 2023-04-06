@@ -93,6 +93,7 @@ article {
     justify-content: center;
     grid-template-columns: 1fr 1fr;
     background-color: #2c599d;
+    height: 700px
 }
 
 .main_form {

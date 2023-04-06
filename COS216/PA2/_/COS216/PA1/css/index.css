@@ -1,0 +1,159 @@
+@font-face {
+    font-family: NavbarF;
+    src: url("../fonts/RubikMonoOne-Regular.ttf");
+}
+
+@font-face {
+    font-family: Headings;
+    src: url("../fonts/SecularOne-Regular.ttf");
+}
+
+@font-face {
+    font-family: Body;
+    src: url("../fonts/GolosText-VariableFont_wght.ttf");
+}
+/*
+Gray: #9c9c9c
+Burgundy: #b03702
+*/
+body{
+    padding: 0px;
+    margin: 0px;
+    background-color: #facdaa;
+}
+nav
+{
+    background-color: #F98124;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+    
+}
+.navbar{
+    list-style: none;
+    margin: 0%;
+    padding: 0%;
+    height: 110px;
+}
+.navbar li{
+    display: inline;
+    padding: 0px;
+    margin: 0px;
+}
+.navbar li a{
+    padding: 0px;
+    margin: 0px;
+    display: inline-block;
+    padding: 2% 4%;
+    font-size: 20px;
+    text-decoration: none;
+    color: #11224d;
+    font-family: NavbarF;
+}
+.navbar li a:hover:not(.curr_page){
+    background-color: #be641e;
+    height: 34px;
+}
+.curr_page{
+    background-color: #9c9c9c;
+    height: 34px;
+}
+.navbar li img{
+    position: absolute;
+    top: 00.5%;
+    left: 0.5%;
+    padding: 0px;
+    margin: 0px;
+    text-align: left;
+    width: 5%;
+
+}
+h1{
+    font-family: Headings;
+    text-align: center;
+    background-color: #11224d;
+    color: rgb(255, 255, 255);
+    font-size: 500%;
+    padding: 0px;
+    margin: 0px;
+}
+.searchOptions
+{
+    display: inline-flex;
+    float: center;
+    width: 100%;
+    background-color: #2c599d;
+    justify-content: center;
+    align-items: center;
+
+
+}
+.searchOptions div{
+    padding: 0% 5%;
+    width: 30%;
+    background-color: #2c599d;
+    border: black;
+    border-width: 5px;
+    color: rgb(240, 240, 240);
+    font-family: Body;
+    text-align: center;
+}
+.filter{
+    padding: 0%;
+}
+.filList{
+    list-style-type: none;
+    padding-left: 0%;
+}
+h2{
+    margin: 0
+}
+.car_list{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-top: 500px;
+    background-color: black;
+    gap: 0px 50px;
+    padding-top: 0.5%;
+    margin-top: 10px;
+    height: 800px;
+    background-color: #facdaa;
+}
+.car_list li{
+    background-color: #d1d1d1;
+    border-width: 5px;
+    border-style: solid;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 220px;
+    gap: 0px;
+    justify-content: center;
+    padding: 0px;
+    margin: 0px;
+}
+.car_list li h3{
+    font-family: Headings;
+    border-style: none;
+}
+
+.car1_info{
+    border-style: none;
+    padding-left: 0px;
+    padding-top: 8%;
+    background-color: #d1d1d1;
+    color:black;
+}
+.car1_info li{
+    border-style: none;
+    padding: 0px;
+    margin: 0px;
+    height: 23px;
+    font-family: Body;
+}
+.name_pic{
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+}
