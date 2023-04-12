@@ -1,5 +1,5 @@
 <!--Michael Horwitz u22512323-->
-<!DOCTYPE html>
+
 <head lang="en">
     <title>CarTographer</title>
     <link rel="stylesheet" type="text/css" href="./css/index.css">
@@ -7,17 +7,9 @@
 </head>
 
 <body>
-    <nav>
-        <nav>
-            <ul class="navbar">
-                <li><img src="./img/logo.png" alt="Image not found"></li>
-                <li><a href="./Index.html" class="curr_page">Cars</a></li>
-                <li><a href="./Brands.html">Car Brands</a></li>
-                <li><a href="./FindCar.html">Find me a car</a></li>
-                <li><a href="./Compare.html">Compare</a></li>
-            </ul>
-        </nav>
-    </nav>
+    <?php
+        include "header.php";
+    ?>
     <header class="main_head">
         <h1>Car Catalog</h1>
     </header>
