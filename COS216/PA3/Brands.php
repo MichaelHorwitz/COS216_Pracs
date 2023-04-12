@@ -7,17 +7,9 @@
 </head>
 
 <body>
-    <nav>
-        <nav>
-            <ul class="navbar">
-                <li><img src="./img/logo.png" alt="Image not found"></li>
-                <li><a href="./Index.html">Cars</a></li>
-                <li><a href="./Brands.html" class="curr_page">Car Brands</a></li>
-                <li><a href="./FindCar.html">Find me a car</a></li>
-                <li><a href="./Compare.html">Compare</a></li>
-            </ul>
-        </nav>
-    </nav>
+<?php
+        include "header.php";
+    ?>
     <header>
         <h1>Our Family</h1>
     </header>

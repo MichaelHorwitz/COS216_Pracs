@@ -55,7 +55,7 @@ nav
     background-color: #be641e;
     height: 34px;
 }
-.curr_page{
+#IndexNav{
     background-color: #9c9c9c;
     height: 34px;
 }

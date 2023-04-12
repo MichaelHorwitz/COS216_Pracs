@@ -1,5 +1,5 @@
 <!--Michael Horwitz u22512323-->
-
+<!DOCTYPE html>
 <head lang="en">
     <title>CarTographer</title>
     <link rel="stylesheet" type="text/css" href="./css/index.css">
