@@ -55,7 +55,7 @@ public function addUser($apiKey, $type, $limit = -1, $sort = "", $order = "", $f
             $query .= " " . $order;
         }
     }
-    echo "THIS IS CONN" . $this->conn;
+    //echo "THIS IS CONN" . $this->conn;
     //echo $this->conn->query($query);
     $servername = "wheatley.cs.up.ac.za";
     $username = "u22512323";
@@ -71,14 +71,15 @@ public function addUser($apiKey, $type, $limit = -1, $sort = "", $order = "", $f
             $dataArr[$i] = $row;
         }
     }
-    $toPost;
-    $toPost->status = "success";
-    $toPost->timestamp = time();
-    $toPost->data = $dataArr;
+    $toPost = array();
+    $toPost['status'] = "success";
+    $toPost['timestamp'] = time();
+    $toPost['data'] = $dataArr;
     echo json_encode($toPost);    
 }
 }
+//echo $_POST;
 $instance = Database::instance();
-$postObj = json_decode($_POST[0]);
-$instance->addUser("1234", "GetAllCars", $postObj["limit"], $postObj["sort"], $postObj["order"], $postObj["fuzzy"], $postObj["search"], "*");
+@$postObj = json_decode($_POST[0]);
+@$instance->addUser("1234", "GetAllCars", $postObj["limit"], $postObj["sort"], $postObj["order"], $postObj["fuzzy"], $postObj["search"], "*");
 ?>
