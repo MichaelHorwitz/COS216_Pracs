@@ -6,23 +6,28 @@ public static function instance()
 {
 static $instance = null; // remember that this only ever gets called once
 if($instance === null) $instance = new Database();
-return $instance;
+    return $instance;
 }
 private function __construct() {
     $servername = "wheatley.cs.up.ac.za";
     $username = "u22512323";
     $password = "UFYT4LNTU7XNWZGY2NW7OR7FBYSBNNVW";
     // Create connection
-    $conn = new mysqli($servername, $username, $password);
+    $this->conn = new mysqli($servername, $username, $password);
     // Check connection
-    if ($conn->connect_error) {
+    if ($this->conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
     //use u22512323
 }
-public function __destruct() { /* Disconnect from the database */ }
-public function getCars($apiKey, $type, $limit = -1, $sort = "", $order = "", $fuzzy = true, $search = null, $return = "*"){
+public function __destruct() {}
 
+public function getCars($apiKey, $type, $limit = -1, $sort = "", $order = "", $fuzzy = true, $search = null, $return = "*"){
+    $query = "SELECT Apikey from Users where apikey = " . $apiKey;
+    if (!$this->conn->query($query)) {
+        echo "Invalid key";
+        die();
+    }
     $query = "SELECT ";
     if ($return == "*") {
         $query = $query . $return;
@@ -64,16 +69,17 @@ public function getCars($apiKey, $type, $limit = -1, $sort = "", $order = "", $f
     $conn->query("USE u22512323;");
     $result = $conn->query($query);
     $dataArr = array();
-    echo "This is the query<br>";
-    print_r ($query);
-    echo "<br>";
+    //echo "This is the query<br>";
+    //print_r ($query);
+    //echo "<br>";
     if ($result->num_rows > 0) {
     // output data of each row
         $i = 0;
         while($row = $result->fetch_assoc()) {
-            print_r($row);
-            echo "<br>";
-            $dataArr[$i] = $row;
+            //print_r($row);
+            //echo "<br>NEW ROW";
+            //$dataArr[$i] = $row;
+            array_push($dataArr, $row);
         }
     }
     $toPost = array();
@@ -83,8 +89,8 @@ public function getCars($apiKey, $type, $limit = -1, $sort = "", $order = "", $f
     echo json_encode($toPost);    
 }
 }
-print_r($_POST);
+//print_r($_POST);
 $instance = Database::instance();
-@$postObj = json_decode($_POST[0]);
-@$instance->getCars("1234", "GetAllCars", $postObj["limit"], $postObj["sort"], $postObj["order"], $postObj["fuzzy"], $postObj["search"], "*");
+$postObj = json_decode($_POST[0]);
+$instance->getCars("1234", "GetAllCars", $postObj["limit"], $postObj["sort"], $postObj["order"], $postObj["fuzzy"], $postObj["search"], "*");
 ?>

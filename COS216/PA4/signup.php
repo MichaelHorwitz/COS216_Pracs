@@ -39,10 +39,10 @@
                 var passBox = document.getElementById("password");
                 var passStr = passBox.value;
                 if (passStr.length > 8) {
-                    if (passStr.search("[a-b]") === -1 ) {
+                    if (passStr.search("[a-z]") === -1 ) {
                         document.getElementById("passErr").innerHTML = "Password must contain lower case";
                         return false;
-                    } else if (passStr.search("[A-B]") === -1 ) {
+                    } else if (passStr.search("[A-Z]") === -1 ) {
                         document.getElementById("passErr").innerHTML = "Password must contain upper case";
                         return false;
                 } else if (passStr.search("[0-9]")  === -1){
