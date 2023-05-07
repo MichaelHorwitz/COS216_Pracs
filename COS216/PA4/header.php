@@ -8,5 +8,6 @@
         <li><a href="./Compare.php" id="CompareNav">Compare</a></li>
         <li><a href="./login.php" id="LoginNav">Login</a></li>
         <li><a href="./signup.php" id="SignUpNav">Sign Up</a></li>
+        <li><a href="./logout.php" id="LogOutNav">Log Out</a></li>
     </ul>
 </nav>

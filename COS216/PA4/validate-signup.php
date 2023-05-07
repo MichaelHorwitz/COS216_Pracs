@@ -20,11 +20,11 @@
     $apiKey = "";
     for ($i=0; $i < 5; $i++) { 
         $apiKey = $apiKey . chr(rand(0,52) + 65);
-        echo "<br>" . $apiKey;
+        //echo "<br>" . $apiKey;
     }
     for ($i=0; $i < 5; $i++) { 
         $apiKey = $apiKey . rand(0,9);
-        echo "<br>" . $apiKey;
+        //echo "<br>" . $apiKey;
     }
     $query = "INSERT INTO Users (Name, Surname, Email, Password, APIKey) VALUES ('" . $_POST["name"] . "', '" . $_POST["surname"] . "', '" . $_POST["email"] . "', '" . $userPass . "', '" . $apiKey . "');";
     try {

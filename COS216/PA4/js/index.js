@@ -1,10 +1,14 @@
 //Michael Horwitz u22512323
 function loadCars() {
     const xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "https://wheatley.cs.up.ac.za/api/");
+    //xhttp.open("POST", "https://wheatley.cs.up.ac.za/api/");
+    xhttp.open("POST", "/api.php/");
     //console.log("Opened");
     xhttp.onload = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
+            console.log("BEFORE");
+            console.log(xhttp.responseText);
+            console.log("AFTER");
             var carResp = JSON.parse(xhttp.responseText);
             if (carResp.status === "success") {
                 var carArr = carResp.data;
@@ -19,6 +23,10 @@ function loadCars() {
                     var carListItemSpanHeading = document.createElement("h3")
                     carListItemSpanHeading.insertAdjacentHTML("afterbegin", car.make + " " + car.model);
                     carListItemSpan.appendChild(carListItemSpanHeading);
+                    var carListItemSpanImg = document.createElement("img");
+                    carListItemSpanImg.setAttribute("src", car.image);
+                    carListItemSpanImg.setAttribute("height", "128");
+                    carListItemSpan.appendChild(carListItemSpanImg);
                     carListItem.appendChild(carListItemSpan);
                     carListItem.setAttribute("id", car.id_trim);
                     var carListItemList = document.createElement("ul");
@@ -28,12 +36,9 @@ function loadCars() {
                     carListItem.appendChild(carListItemList);
                     carListItemList.appendChild(carListItemListItem);
                     document.getElementById("car_list").appendChild(carListItem);
-                    loadCarImg(car.make, car.model, car.id_trim)
                     /*
-                    carListItemSpanImg.setAttribute("src", currCarImgURL);
-                    console.log(currCarImgURL);
-                    carListItemSpan.appendChild(carLIstItemSpanImg);
                     */
+                    //loadCarImg(car.make, car.model, car.id_trim)
                 }
             }
         }
@@ -66,7 +71,7 @@ function loadCars() {
         sendObj.search = makeSearch;
     }
     var engList = document.getElementById("engList");
-    console.log(engList.childNodes);
+    //console.log(engList.childNodes);
     for (let index = 0; index < engList.childNodes.length; index++) {
         if (engList.childNodes[index].checked) {
             //console.log(index);
