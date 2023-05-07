@@ -24,14 +24,15 @@ private function __construct() {
 public function __destruct() {}
 
 public function getCars($apiKey, $type, $limit = -1, $sort = "", $order = "", $fuzzy = true, $search = null, $return = "*"){
-    /*
-    $query = "SELECT Apikey from Users where apikey = " . $apiKey;
+    
+    $query = "SELECT Apikey from Users where apikey = '" . $apiKey . "'";
+    //echo $query;
     if (!$this->conn->query($query)) {
         echo "Invalid key";
-        
+        header("HTTP/1.1 400 Bad Request");
         exit();
     }
-    */
+    
     $query = "SELECT ";
     if ($return == "*") {
         $query = $query . $return;

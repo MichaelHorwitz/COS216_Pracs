@@ -27,13 +27,7 @@
                 if ($givenPass === $correctPass) {
                     
                     echo '<script type="text/javascript"> 
-                    function setCookie(cname, cvalue, exdays) {
-                        const d = new Date();
-                        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-                        let expires = "expires="+d.toUTCString();
-                        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-                    };
-                    setCookie("APIKey", "' . $row["APIKey"] . '", 1);
+                    localStorage.setItem("APIKey", "' . $row["APIKey"] . '");
                     alert("You are now logged in"); 
                     window.location.href="index.php";
                     </script>';
