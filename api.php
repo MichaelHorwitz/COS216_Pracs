@@ -21,7 +21,7 @@ private function __construct() {
     //use u22512323
 }
 public function __destruct() { /* Disconnect from the database */ }
-public function addUser($apiKey, $type, $limit = -1, $sort = "", $order = "", $fuzzy = true, $search = null, $return = "*"){
+public function getCars($apiKey, $type, $limit = -1, $sort = "", $order = "", $fuzzy = true, $search = null, $return = "*"){
 
     $query = "SELECT ";
     if ($return == "*") {
@@ -64,10 +64,15 @@ public function addUser($apiKey, $type, $limit = -1, $sort = "", $order = "", $f
     $conn->query("USE u22512323;");
     $result = $conn->query($query);
     $dataArr = array();
+    echo "This is the query<br>";
+    print_r ($query);
+    echo "<br>";
     if ($result->num_rows > 0) {
-    // output data of each ro
+    // output data of each row
         $i = 0;
         while($row = $result->fetch_assoc()) {
+            print_r($row);
+            echo "<br>";
             $dataArr[$i] = $row;
         }
     }
@@ -78,8 +83,8 @@ public function addUser($apiKey, $type, $limit = -1, $sort = "", $order = "", $f
     echo json_encode($toPost);    
 }
 }
-//echo $_POST;
+print_r($_POST);
 $instance = Database::instance();
 @$postObj = json_decode($_POST[0]);
-@$instance->addUser("1234", "GetAllCars", $postObj["limit"], $postObj["sort"], $postObj["order"], $postObj["fuzzy"], $postObj["search"], "*");
+@$instance->getCars("1234", "GetAllCars", $postObj["limit"], $postObj["sort"], $postObj["order"], $postObj["fuzzy"], $postObj["search"], "*");
 ?>

@@ -57,4 +57,7 @@
         <ul class="car_list" id="car_list"></ul>
     </article>
     <script type="text/javascript" src="./js/index.js"></script>
+    <?php
+        include "footer.php";
+    ?>
 </body>

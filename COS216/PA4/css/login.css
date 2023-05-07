@@ -1,0 +1,81 @@
+/*Michael Horwitz u22512323*/
+@font-face {
+    font-family: NavbarF;
+    src: url("../fonts/RubikMonoOne-Regular.ttf");
+}
+
+@font-face {
+    font-family: Headings;
+    src: url("../fonts/SecularOne-Regular.ttf");
+}
+
+@font-face {
+    font-family: Body;
+    src: url("../fonts/GolosText-VariableFont_wght.ttf");
+}
+/*
+Gray: #9c9c9c
+Burgundy: #b03702
+*/
+body{
+    padding: 0px;
+    margin: 0px;
+    background-color: #facdaa;
+}
+nav
+{
+    background-color: #F98124;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+    
+}
+.navbar{
+    list-style: none;
+    margin: 0%;
+    padding: 0%;
+    
+    width: 80%;
+}
+.navbar li{
+    display: inline;
+    padding: 0px;
+    margin: 0px;
+}
+.navbar li a{
+    padding: 0px;
+    margin: 0px;
+    display: inline-block;
+    padding: 2% 4%;
+    font-size: 20px;
+    text-decoration: none;
+    color: #11224d;
+    font-family: NavbarF;
+}
+.navbar li a:hover:not(.curr_page){
+    background-color: #be641e;
+    height: 34px;
+}
+#LoginNav{
+    background-color: #9c9c9c;
+    height: 34px;
+}
+.navbar li img{
+    position: absolute;
+    top: 00.5%;
+    left: 0.5%;
+    padding: 0px;
+    margin: 0px;
+    text-align: left;
+    width: 5%;
+
+}
+h1{
+    font-family: Headings;
+    text-align: center;
+    background-color: #11224d;
+    color: rgb(255, 255, 255);
+    font-size: 500%;
+    padding: 0px;
+    margin: 0px;
+}
