@@ -2,6 +2,8 @@ const express = require('express');
 const http = require('http');
 const { Server } = require("socket.io");
 const readline = require('readline');
+const { start } = require('repl');
+const axios = require('axios');
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
@@ -9,7 +11,34 @@ const io = new Server(server);
 var usernamesInUse = [];
 var rooms = [];
 var numRooms = 0;
+function startGame(gameID){
+  console.log("Game started");
+  console.log(gameID);
+  io.to(gameID).emit("countdownStart");
+  var rounds = [];
+  try {
+    for (let i = 0; i < 5; i++) {
+      var responseStr = axios.get('/api.php/GetRandomCars');
+      var response = JSON.parse(responseStr);
+      rounds[i] = response;
+    }
+    var sendObj = {rounds: rounds};
+    io.to(gameID).emit('gameStart', sendObj);
+  } catch (error) {
+    console.error(error);
+  }
+}
+function generateGameID() {
+  var gameID = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
 
+  for (let i = 0; i < 10; i++) {
+    gameID += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+
+  return gameID;
+}
 function checkUsername(username, socketID){
   var inUse = false;
   //console.log("InputUsername: " + username);
@@ -44,9 +73,23 @@ io.on('connection', (socket) => {
     }
   });
   socket.on('createNewGame', ()=>{
-    socket.join(numRooms);
-    numRooms = numRooms + 1;
-    socket.emit('gameID', (numRooms-1));
+    //console.log("Server create new game");
+    var gameID = generateGameID();
+    socket.join(gameID);
+    var sendObj = {gameID: gameID}
+    socket.emit('gameID', sendObj);
+  });
+  socket.on('joinGame', (gameID)=>{
+    //socket.join(gameID)
+    //console.log("server join:" + gameID);
+    //console.log(io.sockets.adapter.rooms);
+    if(io.sockets.adapter.rooms.has(gameID))
+    {
+      socket.join(gameID);
+      startGame(gameID);
+    } else {
+      socket.emit('joinError');
+    }
   });
 
 });

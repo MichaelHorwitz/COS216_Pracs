@@ -1,47 +1,106 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>BrandRace</title>
-  </head>
-  <body>
 
-    <div id="heading">
-      <h1>Welcome to Brand Race</h1>
-    </div>
-    <div id="usernameInput">
-      <h2>Please input a username below</h2>
-      <input type="text" id="usernameInputBox">
-      <button id="usernameInputSubmitButton">Submit</button>
-    </div>
-    <div id="gameChoice"></div>
+<head>
+  <title>BrandRace</title>
+</head>
+
+<body>
+
+  <div id="heading">
+    <h1 id="mainHeading">Welcome to Brand Race</h1>
+  </div>
+  <div id="usernameInput">
+    <h2>Please input a username below</h2>
+    <input type="text" id="usernameInputBox">
+    <button id="usernameInputSubmitButton">Submit</button>
+  </div>
+  <div id="gameChoice"></div>
+  <div id="game"></div>
 
 
 
 
-    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-    <script>
-      var socket = io();
-      var usernameInputBox = document.getElementById("usernameInputBox");
-      var usernameInputSubmitButton = document.getElementById("usernameInputSubmitButton");
-      usernameInputSubmitButton.onclick = () => {
-        socket.emit('checkUsername', usernameInputBox.value);
-      };
-      function createNewGame(){
-        socket.emit('createNewGame');
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script>
+    var socket = io();
+    var usernameInputBox = document.getElementById("usernameInputBox");
+    var usernameInputSubmitButton = document.getElementById("usernameInputSubmitButton");
+    var rounds;
+    usernameInputSubmitButton.onclick = () => {
+      socket.emit('checkUsername', usernameInputBox.value);
+    };
+    function joinGame() {
+      var gameID = document.getElementById('gameIDBox').value;
+      alert('Client join: ' + gameID);
+      socket.emit('joinGame', gameID);
+    }
+    function createNewGame() {
+      socket.emit('createNewGame');
+    }
+    socket.on('gameID', (result) => {
+      //alert("Game received");
+      var gameID = result.gameID;
+      document.getElementById('gameChoice').innerHTML = "";
+      document.getElementById('game').innerHTML = "";
+      var heading = document.getElementById('mainHeading');
+      //console.log(heading);
+      heading.innerHTML = "GameID: " + gameID;
+    })
+    socket.on('usernameResult', (result) => {
+      if (result.result === false) {
+        alert("Username already in use");
+      } else {
+        var heading = document.getElementById("heading");
+        heading.innerHTML = '<h1 id="mainHeading" >Welcome to Brand Race</h1>' + '<h1>' + result.username + '</h1>';
+        var newInfo = document.getElementById("gameChoice");
+        newInfo.innerHTML = '<button id="createNew">Create new game</button><br>-------------------------or--------------------<br><input type="text" id="gameIDBox" placeholder="Enter Game ID"><button id="submitGameID">Join Game</button>';
+        document.getElementById("usernameInput").innerHTML = "";
+        var newGame = document.getElementById("createNew");
+        newGame.onclick = createNewGame;
+        var joinGameButton = document.getElementById('submitGameID');
+        joinGameButton.onclick = joinGame;
       }
-      socket.on('usernameResult', (result)=>{
-        if (result.result === false) {
-          alert("Username already in use");
-        } else {
-          var heading = document.getElementById("heading");
-          heading.innerHTML = "<h1>Welcome to Brand Race</h1>" + "<h1>" + result.username + "</h1>";
-          var newInfo = document.getElementById("gameChoice");
-          newInfo.innerHTML = '<button id="createNew">Create new game</button><br>-------------------------or--------------------<br><input type="text" id="gameIDBox" placeholder="Enter Game ID"><button id="submitGameID">Join Game</button>';
-          document.getElementById("usernameInput").innerHTML = "";
-          var newGame = document.getElementById("createNew");
-          newGame.onclick = createNewGame;
-        }
-      });
-      </script>
-  </body>
+    });
+    socket.on('joinError', () => {
+      alert("Room does not exist");
+    });
+    function startRound(roundNum){
+      document.getElementById("mainHeading").innerHTML = 'ROUND: ' + (roundNum + 1);
+      var img;
+      if (roundNum === 0) {
+        img = document.createElement("img");
+        img.setAttribute('id', "gameImg");
+        document.getElementById("game").appendChild(img);
+        
+      } else {
+        img = document.getElementById('gameImg');
+      }
+      img.setAttribute('src', rounds[roundNum].BrandImg);
+    }
+    socket.on('countdownStart', () => {
+      const timerElement = document.getElementById('game');
+      document.getElementById("usernameInput").innerHTML = "";
+      document.getElementById("gameChoice").innerHTML = "";
+      startCountdown(5);
+      function startCountdown(duration) {
+        var timer = duration;
+
+        const countdownInterval = setInterval(() => {
+          timerElement.textContent = timer;
+          timer--;
+          if (timer < 0) {
+            clearInterval(countdownInterval);
+            
+            startRound(0);
+          }
+        }, 1000);
+      }
+    });
+    socket.on('gameStart', (response) => {
+      rounds = response.rounds;
+    });
+  </script>
+</body>
+
 </html>

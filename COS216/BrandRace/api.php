@@ -29,7 +29,7 @@
             $row = $result->fetch_assoc();
             $sendObj = array(
                 'BrandName' => $row['BrandName'],
-                'Brandimg' => $row['BrandImg']
+                'BrandImg' => $row['BrandImg']
             );
             echo json_encode($sendObj);
             die();
