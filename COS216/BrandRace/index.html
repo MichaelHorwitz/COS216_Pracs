@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BrandRace</title>
+  </head>
+  <body>
+
+    <div id="heading">
+      <h1>Welcome to Brand Race</h1>
+    </div>
+    <div id="usernameInput">
+      <h2>Please input a username below</h2>
+      <input type="text" id="usernameInputBox">
+      <button id="usernameInputSubmitButton">Submit</button>
+    </div>
+    <div id="gameChoice"></div>
+
+
+
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script>
+      var socket = io();
+      var usernameInputBox = document.getElementById("usernameInputBox");
+      var usernameInputSubmitButton = document.getElementById("usernameInputSubmitButton");
+      usernameInputSubmitButton.onclick = () => {
+        socket.emit('checkUsername', usernameInputBox.value);
+      };
+      function createNewGame(){
+        socket.emit('createNewGame');
+      }
+      socket.on('usernameResult', (result)=>{
+        if (result.result === false) {
+          alert("Username already in use");
+        } else {
+          var heading = document.getElementById("heading");
+          heading.innerHTML = "<h1>Welcome to Brand Race</h1>" + "<h1>" + result.username + "</h1>";
+          var newInfo = document.getElementById("gameChoice");
+          newInfo.innerHTML = '<button id="createNew">Create new game</button><br>-------------------------or--------------------<br><input type="text" id="gameIDBox" placeholder="Enter Game ID"><button id="submitGameID">Join Game</button>';
+          document.getElementById("usernameInput").innerHTML = "";
+          var newGame = document.getElementById("createNew");
+          newGame.onclick = createNewGame;
+        }
+      });
+      </script>
+  </body>
+</html>
