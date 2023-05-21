@@ -27,24 +27,25 @@
     var usernameInputBox = document.getElementById("usernameInputBox");
     var usernameInputSubmitButton = document.getElementById("usernameInputSubmitButton");
     var rounds;
+    var currRound = -1;
+    var globalGameID = '';
     usernameInputSubmitButton.onclick = () => {
       socket.emit('checkUsername', usernameInputBox.value);
     };
     function joinGame() {
       var gameID = document.getElementById('gameIDBox').value;
-      alert('Client join: ' + gameID);
+      globalGameID = gameID;
       socket.emit('joinGame', gameID);
     }
     function createNewGame() {
       socket.emit('createNewGame');
     }
     socket.on('gameID', (result) => {
-      //alert("Game received");
       var gameID = result.gameID;
+      globalGameID = gameID;
       document.getElementById('gameChoice').innerHTML = "";
       document.getElementById('game').innerHTML = "";
       var heading = document.getElementById('mainHeading');
-      //console.log(heading);
       heading.innerHTML = "GameID: " + gameID;
     })
     socket.on('usernameResult', (result) => {
@@ -65,19 +66,67 @@
     socket.on('joinError', () => {
       alert("Room does not exist");
     });
+
+    var time;
+    function doGuess(){
+      var inputBox = document.getElementById('gameInputBox');
+      var guess = inputBox.value;
+      if (guess === rounds[currRound].BrandName) {
+        time = (Date.now() - start)/1000;
+        socket.emit('guess', globalGameID);
+      } else {
+        alert("Incorrect Guess");
+      }
+    }
+
+    socket.on('roundWin', ()=>{
+      var game = document.getElementById('game');
+      game.innerHTML = 'You Won! ' + time + 'seconds';
+    });
+    socket.on('roundLose', ()=>{
+      var game = document.getElementById('game');
+      game.innerHTML = 'You Lost :(' + time + 'seconds';
+    });
+    socket.on('roundBegin', ()=>{
+      currRound++;
+      startRound(currRound);
+    });
+    socket.on('gameWin', () =>{
+      var game = document.getElementById('game');
+      game.innerHTML = 'You WON the game thank you for playing';
+    });
+    socket.on('gameLose', ()=>{
+      var game = document.getElementById('game');
+      game.innerHTML = 'You LOST the game thank you for playing';
+    })
+    var start;
     function startRound(roundNum){
+      start = Date.now();
+      currRound = roundNum;
       document.getElementById("mainHeading").innerHTML = 'ROUND: ' + (roundNum + 1);
+      var game = document.getElementById('game');
+      game.innerHTML = "";
       var img;
-      if (roundNum === 0) {
+      img = document.getElementById('gameImg');
+      if (img == null) {
         img = document.createElement("img");
         img.setAttribute('id', "gameImg");
-        document.getElementById("game").appendChild(img);
-        
-      } else {
-        img = document.getElementById('gameImg');
+        game.appendChild(img);
       }
       img.setAttribute('src', rounds[roundNum].BrandImg);
+      img.setAttribute('height', '128');
+      var inputBox = document.createElement('input');
+      inputBox.setAttribute('id', 'gameInputBox');
+      inputBox.setAttribute('placeholder', 'Guess Here');
+      game.appendChild(inputBox);
+      var inputButton = document.createElement('button');
+      inputButton.setAttribute('id', 'gameInputButton');
+      inputButton.innerHTML = 'Guess';
+      game.appendChild(inputButton);
+      console.log(rounds[currRound].BrandName)
+      inputButton.onclick = doGuess;
     }
+    
     socket.on('countdownStart', () => {
       const timerElement = document.getElementById('game');
       document.getElementById("usernameInput").innerHTML = "";
@@ -91,7 +140,6 @@
           timer--;
           if (timer < 0) {
             clearInterval(countdownInterval);
-            
             startRound(0);
           }
         }, 1000);
@@ -99,6 +147,9 @@
     });
     socket.on('gameStart', (response) => {
       rounds = response.rounds;
+    });
+    socket.on('endServer', ()=>{
+      alert("Server Ending");
     });
   </script>
 </body>

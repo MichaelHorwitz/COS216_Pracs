@@ -1,54 +1,104 @@
 <?php
-class Database
-{
+class Database{
     public $conn;
-public static function instance()
+    public static function instance()
+    {
+    static $instance = null; // remember that this only ever gets called once
+    if($instance === null) $instance = new Database();
+        return $instance;
+    }
+    private function __construct() {
+        $servername = "wheatley.cs.up.ac.za";
+        $username = "u22512323";
+        $password = "UFYT4LNTU7XNWZGY2NW7OR7FBYSBNNVW";
+        // Create connection
+        $this->conn = new mysqli($servername, $username, $password);
+        // Check connection
+        if ($this->conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        //use u22512323
+        $this->conn->query("USE u22512323_;");
+    }
+    public function __destruct() {
+        
+    }
+    public function getRandomBrands(){
+        //echo 'got to functions';
+        $query = "SELECT BrandName, BrandImg FROM CarBrands ORDER BY RAND() LIMIT 1";
+        $result = $this->conn->query($query);
+        $row = $result->fetch_assoc();
+        //REMOVE
+        //$row['BrandImg'] = '';
+        $sendObj = array(
+            'BrandName' => $row['BrandName'],
+            'BrandImg' => $row['BrandImg']
+        );
+        echo json_encode($sendObj);
+        header("HTTP/1.1 200 OK");
+        die();
+    }
+}
+$requestURI = $_SERVER['REQUEST_URI'];
+if ($requestURI !== '/api.php/GetRandomCars') {
+    header("HTTP/1.1 400 Bad Request");
+    echo "Incorrect endpoint<br>";
+    echo $requestURI;
+    die();
+}
+$instance = Database::instance();
+$instance->getRandomBrands();
+/*
 {
-static $instance = null; // remember that this only ever gets called once
-if($instance === null) $instance = new Database();
-    return $instance;
-}
-private function __construct() {
-    $servername = "wheatley.cs.up.ac.za";
-    $username = "u22512323";
-    $password = "UFYT4LNTU7XNWZGY2NW7OR7FBYSBNNVW";
-    // Create connection
-    $this->conn = new mysqli($servername, $username, $password);
-    // Check connection
-    if ($this->conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+class Database
+    public $conn;
+    public static function instance()
+    {
+        static $instance = null; // remember that this only ever gets called once
+        if($instance === null) $instance = new Database();
+        return $instance;
     }
-    //use u22512323
-    $this->conn->query("USE u22512323;");
-}
-public function __destruct() {}
-
-public function getCars($apiKey, $type, $limit = -1, $sort = "", $order = "", $fuzzy = true, $search = null, $return = "*"){
-    
-    $query = "SELECT Apikey from Users where apikey = '" . $apiKey . "'";
-    //echo $query;
-    if (!$this->conn->query($query)) {
-        echo "Invalid key";
-        header("HTTP/1.1 400 Bad Request");
-        exit();
+    private function __construct() {
+        $servername = "wheatley.cs.up.ac.za";
+        $username = "u22512323";
+        $password = "UFYT4LNTU7XNWZGY2NW7OR7FBYSBNNVW";
+        // Create connection
+        $this->conn = new mysqli($servername, $username, $password);
+        // Check connection
+        if ($this->conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        //use u22512323
+        $this->conn->query("USE u22512323;");
     }
+    public function __destruct() {}
     
-    $query = "SELECT ";
-    if ($return == "*") {
-        $query = $query . $return;
-    } else {
-        $query .= $return[0];
-        for ($i=1; $i < count($return); $i++) {
-            if ($return[$i] === "image") {
-                $image = true;
-            } else {
-                $query = $query . ", " . $return[$i];
+    public function getCars($apiKey, $type, $limit = -1, $sort = "", $order = "", $fuzzy = true, $search = null, $return = "*"){
+        
+        $query = "SELECT Apikey from Users where apikey = '" . $apiKey . "'";
+        //echo $query;
+        if (!$this->conn->query($query)) {
+            echo "Invalid key";
+            header("HTTP/1.1 400 Bad Request");
+            exit();
+        }
+        
+        $query = "SELECT ";
+        if ($return == "*") {
+            $query = $query . $return;
+        } else {
+            $query .= $return[0];
+            for ($i=1; $i < count($return); $i++) {
+                if ($return[$i] === "image") {
+                    $image = true;
+                } else {
+                    $query = $query . ", " . $return[$i];
+                }
             }
         }
-    }
-    $query .= " FROM cars ";
-    if ($search != NULL) {
-        $query .= " WHERE ";
+        $query .= " FROM cars ";
+        if ($search != NULL) {
+            $query .= " WHERE ";
         if ($fuzzy == null || $fuzzy == true) {
             foreach ($search as $key => $value) {
                 $query .= $key . " LIKE \"%" . $value . "%\" AND ";
@@ -69,7 +119,7 @@ public function getCars($apiKey, $type, $limit = -1, $sort = "", $order = "", $f
     if ($limit != NULL) {
         $query .= " LIMIT " . $limit;
     }
-
+    
     $this->conn->query("USE u22512323;");
     //echo "<br><br> The query is: " . $query . "<br><br>";
     
@@ -96,7 +146,7 @@ public function getCars($apiKey, $type, $limit = -1, $sort = "", $order = "", $f
         }
     }
     curl_close($curl);
-
+    
     $toPost = array();
     $toPost['status'] = "success";
     $toPost['timestamp'] = time();
@@ -108,7 +158,8 @@ $jsonData = file_get_contents('php://input');
 $postObj = json_decode($jsonData, true); // Decodes JSON as associative array
 $instance = Database::instance();
 //$postObj = json_decode($_POST[0]);
-set_error_handler(function() { /* ignore errors */ });
+set_error_handler(function() {});
 $instance->getCars($postObj["apikey"], "GetAllCars", $postObj["limit"], $postObj["sort"], $postObj["order"], $postObj["fuzzy"], $postObj["search"], $postObj["return"]);
 restore_error_handler();
+*/
 ?>

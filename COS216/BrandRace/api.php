@@ -24,9 +24,12 @@
             
         }
         public function getRandomBrands(){
+            //echo 'got to functions';
             $query = "SELECT BrandName, BrandImg FROM CarBrands ORDER BY RAND() LIMIT 1";
             $result = $this->conn->query($query);
             $row = $result->fetch_assoc();
+            //REMOVE
+            //$row['BrandImg'] = '';
             $sendObj = array(
                 'BrandName' => $row['BrandName'],
                 'BrandImg' => $row['BrandImg']
@@ -35,13 +38,15 @@
             die();
         }
     }
+    /*
     $requestURI = $_SERVER['REQUEST_URI'];
-    if ($requestURI !== '/api.php/GetRandomCars') {
+    if ($requestURI !== '/u22512323/api.php/GetRandomCars') {
         header("HTTP/1.1 400 Bad Request");
-        echo "Incorrect endpoint<br>";
+        echo "Incorrect endpointabc<br>";
         echo $requestURI;
         die();
     }
+*/
     $instance = Database::instance();
     $instance->getRandomBrands();
 ?>
