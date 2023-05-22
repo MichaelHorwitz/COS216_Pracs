@@ -4,29 +4,35 @@
 <head>
   <title>BrandRace</title>
   <style>
-    body{
+    body {
       background: gainsboro;
 
     }
-    #heading{
+
+    #heading {
       text-align: center;
     }
-    #usernameBoxButton{
+
+    #usernameBoxButton {
       display: flex;
       justify-content: center;
     }
-    h2{
+
+    h2 {
       text-align: center;
     }
-    #gameChoice{
+
+    #gameChoice {
       display: grid;
       text-align: center;
     }
-    img{
+
+    img {
       margin-left: auto;
       margin-right: auto;
     }
-    #game{
+
+    #game {
       display: grid;
       text-align: center;
     }
@@ -98,39 +104,41 @@
     });
 
     var time;
-    function doGuess(){
+    function doGuess() {
       var inputBox = document.getElementById('gameInputBox');
       var guess = inputBox.value;
       if (guess === rounds[currRound].BrandName) {
-        time = (Date.now() - start)/1000;
+        time = (Date.now() - start) / 1000;
         socket.emit('guess', globalGameID);
       } else {
         alert("Incorrect Guess");
       }
     }
 
-    socket.on('roundWin', ()=>{
+
+    socket.on('roundWin', () => {
       var game = document.getElementById('game');
       game.innerHTML = 'You Won! ' + time + 'seconds';
+
     });
-    socket.on('roundLose', ()=>{
+    socket.on('roundLose', () => {
       var game = document.getElementById('game');
-      game.innerHTML = 'You Lost :(';
+      game.innerHTML = 'You Lost :(<br> The correct guess was: ' + rounds[currRound].BrandName;
     });
-    socket.on('roundBegin', ()=>{
+    socket.on('roundBegin', () => {
       currRound++;
       startRound(currRound);
     });
-    socket.on('gameWin', () =>{
+    socket.on('gameWin', () => {
       var game = document.getElementById('game');
       game.innerHTML = 'You WON the game thank you for playing';
     });
-    socket.on('gameLose', ()=>{
+    socket.on('gameLose', () => {
       var game = document.getElementById('game');
       game.innerHTML = 'You LOST the game thank you for playing';
     })
     var start;
-    function startRound(roundNum){
+    function startRound(roundNum) {
       start = Date.now();
       currRound = roundNum;
       document.getElementById("mainHeading").innerHTML = 'ROUND: ' + (roundNum + 1);
@@ -156,7 +164,7 @@
       console.log(rounds[currRound].BrandName)
       inputButton.onclick = doGuess;
     }
-    
+
     socket.on('countdownStart', () => {
       const timerElement = document.getElementById('game');
       document.getElementById("usernameInput").innerHTML = "";
@@ -178,7 +186,7 @@
     socket.on('gameStart', (response) => {
       rounds = response.rounds;
     });
-    socket.on('endServer', ()=>{
+    socket.on('endServer', () => {
       alert("Server Ending");
     });
   </script>

@@ -19,12 +19,10 @@ async function startGame(gameID) {
   try {
     for (let i = 0; i < 5; i++) {
       //var response = axios.get('http://localhost:3000/api.php/GetRandomCars');
-      var response = await axios.get('https://u22512323:Pf9xghu4YSFyHw@wheatley.cs.up.ac.za/u22512323/api.php');
+      var response = await axios.get('https://u22512323:Pf9xghu4YSFyHw@wheatley.cs.up.ac.za/u22512323/COS216/BrandRace/api.php');
       rounds[i] = response.data;
-      //console.log(response.data);
     }
     var sendObj = { rounds: rounds };
-    //console.log("SendObj: " + sendObj.rounds[0].data);
     io.to(gameID).emit('gameStart', sendObj);
   } catch (error) {
     console.error(error);
@@ -43,9 +41,7 @@ function generateGameID() {
 }
 function checkUsername(username, socketID) {
   var inUse = false;
-  //console.log("InputUsername: " + username);
   usernamesInUse.forEach(element => {
-    //console.log("currUsername: " + element.username);
     if (element.username == username) {
       inUse = true;
     }
@@ -76,7 +72,6 @@ io.on('connection', (socket) => {
     }
   });
   socket.on('createNewGame', () => {
-    //console.log("Server create new game");
     var gameID = generateGameID();
     socket.join(gameID);
     rooms[gameID] = {};
@@ -87,9 +82,6 @@ io.on('connection', (socket) => {
     socket.emit('gameID', sendObj);
   });
   socket.on('joinGame', (gameID) => {
-    //socket.join(gameID)
-    //console.log("server join:" + gameID);
-    //console.log(io.sockets.adapter.rooms);
     if (io.sockets.adapter.rooms.has(gameID)) {
       rooms[gameID].socket2 = socket.id;
       socket.join(gameID);
@@ -103,10 +95,10 @@ io.on('connection', (socket) => {
     var room = rooms[gameID];
     if (room.socket1 === socket.id) {
       room.score1 = room.score1 + 1;
-      console.log(room.score1);
+      //console.log(room.score1);
     } else if (room.socket2 === socket.id) {
       room.score2 = room.score2 + 1;
-      console.log(room.score2);
+      //console.log(room.score2);
     }
     socketID = socket.id;
     var room = io.sockets.adapter.rooms.get(gameID);
@@ -117,10 +109,6 @@ io.on('connection', (socket) => {
       }
     }
     var room = rooms[gameID];
-    //console.log('room scores');
-    //console.log(room.score1);
-    //console.log(room.score2);
-    //console.log(room.score2 + room.score1);
     if (room.score1 + room.score2 !== 5) {
       setTimeout(() => { io.to(gameID).emit('roundBegin') }, 3000);
     } else {
@@ -174,17 +162,14 @@ rl.on("line", (line) => {
       console.log(element);
     });
   }
-  //console.log(line.split()[0]);
   if (line.split(" ")[0] === 'KILL') {
     var username = line.split(" ")[1];
-    //console.log(username);
     var socketID;
     for (let index = 0; index < usernamesInUse.length; index++) {
       console.log(usernamesInUse[index]);
       if (usernamesInUse[index].username === username) {
         socketID = usernamesInUse[index].socketID;
         usernamesInUse[index] = null;
-        //console.log(socketID);
       }
     }
     console.log(socketID);
