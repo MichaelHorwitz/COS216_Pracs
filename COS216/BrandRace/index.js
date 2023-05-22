@@ -11,7 +11,7 @@ const io = new Server(server);
 var usernamesInUse = [];
 var rooms = {};
 var numRooms = 0;
-async function startGame(gameID){
+async function startGame(gameID) {
   console.log("Game started");
   console.log(gameID);
   io.to(gameID).emit("countdownStart");
@@ -23,7 +23,7 @@ async function startGame(gameID){
       rounds[i] = response.data;
       //console.log(response.data);
     }
-    var sendObj = {rounds: rounds};
+    var sendObj = { rounds: rounds };
     //console.log("SendObj: " + sendObj.rounds[0].data);
     io.to(gameID).emit('gameStart', sendObj);
   } catch (error) {
@@ -41,7 +41,7 @@ function generateGameID() {
 
   return gameID;
 }
-function checkUsername(username, socketID){
+function checkUsername(username, socketID) {
   var inUse = false;
   //console.log("InputUsername: " + username);
   usernamesInUse.forEach(element => {
@@ -53,8 +53,8 @@ function checkUsername(username, socketID){
   if (inUse) {
     return false;
   }
-  usernamesInUse.push({username: username, socketID: socketID});
-  
+  usernamesInUse.push({ username: username, socketID: socketID });
+
   return true;
 }
 
@@ -69,13 +69,13 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
   socket.on('checkUsername', (username) => {
-    if(checkUsername(username, socket.id)){
-      socket.emit('usernameResult', {socketID: socket.id, username:username, result:true});
+    if (checkUsername(username, socket.id)) {
+      socket.emit('usernameResult', { socketID: socket.id, username: username, result: true });
     } else {
-      socket.emit('usernameResult', {socketID: socket.id, username:username, result:false});
+      socket.emit('usernameResult', { socketID: socket.id, username: username, result: false });
     }
   });
-  socket.on('createNewGame', ()=>{
+  socket.on('createNewGame', () => {
     //console.log("Server create new game");
     var gameID = generateGameID();
     socket.join(gameID);
@@ -83,15 +83,14 @@ io.on('connection', (socket) => {
     rooms[gameID].socket1 = socket.id;
     rooms[gameID].score1 = 0;
     rooms[gameID].score2 = 0;
-    var sendObj = {gameID: gameID}
+    var sendObj = { gameID: gameID }
     socket.emit('gameID', sendObj);
   });
-  socket.on('joinGame', (gameID)=>{
+  socket.on('joinGame', (gameID) => {
     //socket.join(gameID)
     //console.log("server join:" + gameID);
     //console.log(io.sockets.adapter.rooms);
-    if(io.sockets.adapter.rooms.has(gameID))
-    {
+    if (io.sockets.adapter.rooms.has(gameID)) {
       rooms[gameID].socket2 = socket.id;
       socket.join(gameID);
       startGame(gameID);
@@ -99,19 +98,19 @@ io.on('connection', (socket) => {
       socket.emit('joinError');
     }
   });
-  socket.on('guess', (gameID)=>{
+  socket.on('guess', (gameID) => {
     socket.emit('roundWin');
     var room = rooms[gameID];
     if (room.socket1 === socket.id) {
       room.score1 = room.score1 + 1;
       console.log(room.score1);
-    } else if(room.socket2 === socket.id) {
+    } else if (room.socket2 === socket.id) {
       room.score2 = room.score2 + 1;
       console.log(room.score2);
     }
     socketID = socket.id;
     var room = io.sockets.adapter.rooms.get(gameID);
-    for(const clientID of room){
+    for (const clientID of room) {
       if (socketID !== clientID) {
         var loserSocket = io.sockets.sockets.get(clientID);
         loserSocket.emit('roundLose');
@@ -123,7 +122,7 @@ io.on('connection', (socket) => {
     //console.log(room.score2);
     //console.log(room.score2 + room.score1);
     if (room.score1 + room.score2 !== 5) {
-      setTimeout(() => {io.to(gameID).emit('roundBegin')}, 3000);
+      setTimeout(() => { io.to(gameID).emit('roundBegin') }, 3000);
     } else {
       console.log("GAME OVER");
       if (room.score1 > room.score2) {
@@ -139,19 +138,27 @@ io.on('connection', (socket) => {
 });
 
 var portNum;
-try {
+var outputted = false;
+function getPort(){
   rl.question('Enter your input: ', (input) => {
     console.log('User input:', input);
     portNum = input;
     server.listen(portNum, () => {
-      console.log('listening on *' + portNum);
-    });  
-  });  
-} catch (error) {
-  console.log("Port taken");
-  console.log(error);
+      if (!outputted) {
+        console.log('listening on *' + portNum);
+        outputted = true;
+      }
+    });
+    server.on('error', () => {
+      console.log('Port in use');
+      getPort();
+    });
+    
+    
+  });
 }
-rl.on("line", (line)=>{
+getPort();
+rl.on("line", (line) => {
   if (line === 'LIST') {
     usernamesInUse.forEach(element => {
       console.log("Username: " + element.username + " SocketID: " + element.socketID);
@@ -171,7 +178,7 @@ rl.on("line", (line)=>{
   if (line.split(" ")[0] === 'KILL') {
     var username = line.split(" ")[1];
     //console.log(username);
-    var socketID; 
+    var socketID;
     for (let index = 0; index < usernamesInUse.length; index++) {
       console.log(usernamesInUse[index]);
       if (usernamesInUse[index].username === username) {

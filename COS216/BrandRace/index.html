@@ -3,6 +3,34 @@
 
 <head>
   <title>BrandRace</title>
+  <style>
+    body{
+      background: gainsboro;
+
+    }
+    #heading{
+      text-align: center;
+    }
+    #usernameBoxButton{
+      display: flex;
+      justify-content: center;
+    }
+    h2{
+      text-align: center;
+    }
+    #gameChoice{
+      display: grid;
+      text-align: center;
+    }
+    img{
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #game{
+      display: grid;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body>
@@ -12,8 +40,10 @@
   </div>
   <div id="usernameInput">
     <h2>Please input a username below</h2>
-    <input type="text" id="usernameInputBox">
-    <button id="usernameInputSubmitButton">Submit</button>
+    <div id="usernameBoxButton">
+      <input type="text" id="usernameInputBox">
+      <button id="usernameInputSubmitButton">Submit</button>
+    </div>
   </div>
   <div id="gameChoice"></div>
   <div id="game"></div>
@@ -85,7 +115,7 @@
     });
     socket.on('roundLose', ()=>{
       var game = document.getElementById('game');
-      game.innerHTML = 'You Lost :(' + time + 'seconds';
+      game.innerHTML = 'You Lost :(';
     });
     socket.on('roundBegin', ()=>{
       currRound++;
