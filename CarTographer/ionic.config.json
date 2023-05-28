@@ -1,0 +1,7 @@
+{
+  "name": "CarTographer",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
