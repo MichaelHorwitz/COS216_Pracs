@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>search-page</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">search-page</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-searchbar (ionChange) = "doPost()" [(ngModel)]="searchVal"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let c of allCars">
+  
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ c.model }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-img src= {{c.image}}></ion-img>
+          <ion-card-subtitle>Engine: {{c.transmission}}</ion-card-subtitle>
+          <ion-card-subtitle>Number of seats: {{c.number_of_seats}}</ion-card-subtitle>
+          
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+    </ion-list>
+</ion-content>

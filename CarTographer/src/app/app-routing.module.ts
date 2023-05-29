@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'logout-page',
     loadChildren: () => import('./logout-page/logout-page.module').then( m => m.LogoutPagePageModule)
+  },
+  {
+    path: 'search-page',
+    loadChildren: () => import('./search-page/search-page.module').then( m => m.SearchPagePageModule)
   }
 ];
 
