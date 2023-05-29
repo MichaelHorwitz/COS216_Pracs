@@ -38,7 +38,7 @@ export class LoginPagePage implements OnInit {
         this.router.navigate(['/cars-page']);
         this.appComponent.appPages = [
           { title: 'Cars', url: '/cars-page', icon: 'car-sport' },
-          { title: 'Search', url: '/folder/Search', icon: 'search-circle' },
+          { title: 'Search', url: '/search-page', icon: 'search-circle' },
           { title: 'Logout', url: '/logout-page', icon: 'log-out' },
         ];
       } else {
