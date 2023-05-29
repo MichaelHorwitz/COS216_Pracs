@@ -11,10 +11,16 @@ import { CapacitorHttp } from '@capacitor/core';
 export class CarsPagePage implements OnInit {
   public engine!: String;
   public allCars: any;
+  public username!: string;
   constructor() { }
 
   ngOnInit() {
     this.doPost();
+    if (localStorage.getItem("apiKey")) {
+      this.username = 'Your ApiKey is: ' + localStorage.getItem("apiKey");
+    } else {
+      this.username = '';
+    }
   }
   public doPost = async () => {
     const options = {

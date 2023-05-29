@@ -14,6 +14,14 @@ const routes: Routes = [
   {
     path: 'cars-page',
     loadChildren: () => import('./cars-page/cars-page.module').then( m => m.CarsPagePageModule)
+  },
+  {
+    path: 'login-page',
+    loadChildren: () => import('./login-page/login-page.module').then( m => m.LoginPagePageModule)
+  },
+  {
+    path: 'logout-page',
+    loadChildren: () => import('./logout-page/logout-page.module').then( m => m.LogoutPagePageModule)
   }
 ];
 
