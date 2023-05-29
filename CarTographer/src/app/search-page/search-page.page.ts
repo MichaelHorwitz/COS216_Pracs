@@ -15,7 +15,7 @@ export class SearchPagePage implements OnInit {
   }
   public doPost = async () => {
     const options = {
-      url: 'http://localhost:3000/api.php',
+      url: 'https://wheatley.cs.up.ac.za/u22512323/api.php',
       //headers: { 'X-Fake-Header': 'Fake-Value' },
       data: {
         "apikey": "fUFrY90651",
@@ -24,6 +24,9 @@ export class SearchPagePage implements OnInit {
         "limit": 5,
         "search": {"model": this.searchVal}
       },
+      headers:{
+        Authorization: `Basic ${btoa('u22512323' + ':' + 'Pf9xghu4YSFyHw')}`
+      }
     };
   
     //const response: HttpResponse = await CapacitorHttp.post(options);

@@ -19,12 +19,15 @@ export class LoginPagePage implements OnInit {
   public submit = async () => {
 
       const options = {
-        url: 'http://localhost:3000/validate-login.php',
+        url: 'https://wheatley.cs.up.ac.za/u22512323/validate-login.php',
         //headers: { 'X-Fake-Header': 'Fake-Value' },
         data: {
-          email: "test@test",//this.username,
-          password: 'testTEST1!'//this.password
-      }      
+          email: this.username,
+          password: this.password //'testTEST1!'
+      },
+      headers:{
+        Authorization: `Basic ${btoa('u22512323' + ':' + 'Pf9xghu4YSFyHw')}`
+      }  
       };
     
       //const response: HttpResponse = await CapacitorHttp.post(options);
