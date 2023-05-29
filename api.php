@@ -1,56 +1,6 @@
 <?php
+
 class Database{
-    public $conn;
-    public static function instance()
-    {
-    static $instance = null; // remember that this only ever gets called once
-    if($instance === null) $instance = new Database();
-        return $instance;
-    }
-    private function __construct() {
-        $servername = "wheatley.cs.up.ac.za";
-        $username = "u22512323";
-        $password = "UFYT4LNTU7XNWZGY2NW7OR7FBYSBNNVW";
-        // Create connection
-        $this->conn = new mysqli($servername, $username, $password);
-        // Check connection
-        if ($this->conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-        //use u22512323
-        $this->conn->query("USE u22512323_;");
-    }
-    public function __destruct() {
-        
-    }
-    public function getRandomBrands(){
-        //echo 'got to functions';
-        $query = "SELECT BrandName, BrandImg FROM CarBrands ORDER BY RAND() LIMIT 1";
-        $result = $this->conn->query($query);
-        $row = $result->fetch_assoc();
-        //REMOVE
-        //$row['BrandImg'] = '';
-        $sendObj = array(
-            'BrandName' => $row['BrandName'],
-            'BrandImg' => $row['BrandImg']
-        );
-        echo json_encode($sendObj);
-        header("HTTP/1.1 200 OK");
-        die();
-    }
-}
-$requestURI = $_SERVER['REQUEST_URI'];
-if ($requestURI !== '/api.php/GetRandomCars') {
-    header("HTTP/1.1 400 Bad Request");
-    echo "Incorrect endpoint<br>";
-    echo $requestURI;
-    die();
-}
-$instance = Database::instance();
-$instance->getRandomBrands();
-/*
-{
-class Database
     public $conn;
     public static function instance()
     {
@@ -138,7 +88,15 @@ class Database
                 if ($response === false) {
                     $error = curl_error($curl);
                 } else {
-                    $row["image"] = $response;
+                    $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+                    //echo "<br><br>";
+                     
+                    if ($httpcode === 400) {
+                      $row['image'] = "";  
+                    } else {
+                        $row["image"] = $response;
+                    }
+                    //echo $url;
                 }
             }
             array_push($dataArr, $row);
@@ -158,8 +116,9 @@ $jsonData = file_get_contents('php://input');
 $postObj = json_decode($jsonData, true); // Decodes JSON as associative array
 $instance = Database::instance();
 //$postObj = json_decode($_POST[0]);
+//echo $postObj;
 set_error_handler(function() {});
 $instance->getCars($postObj["apikey"], "GetAllCars", $postObj["limit"], $postObj["sort"], $postObj["order"], $postObj["fuzzy"], $postObj["search"], $postObj["return"]);
 restore_error_handler();
-*/
+
 ?>

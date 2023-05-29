@@ -7,17 +7,23 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-card>
-    <ion-card-header>
-    <ion-card-title>CarName</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <ion-img src="../../assets/Car2.png"></ion-img>
-    <ion-card-subtitle>Car statistics</ion-card-subtitle>
-    Engine
-  </ion-card-content>
-</ion-card>
+<ion-content [fullscreen]="true" id="mainBody">
+  <ion-list>
+  <ion-item *ngFor="let c of allCars">
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ c.model }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-img src= {{c.image}}></ion-img>
+        <ion-card-subtitle>Engine: {{c.transmission}}</ion-card-subtitle>
+        <ion-card-subtitle>Number of seats: {{c.number_of_seats}}</ion-card-subtitle>
+        
+      </ion-card-content>
+    </ion-card>
+  </ion-item>
+  </ion-list>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">CarsPage</ion-title>
